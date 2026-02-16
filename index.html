@@ -18,7 +18,9 @@
   </ul>
     <div class="cart">
     <i class="fa-solid fa-cart-arrow-down"></i>
-    </div>
+    <span id="cart-count">0</span>
+  </div>
+
   </nav>
 
   <!-- HERO -->
@@ -68,5 +70,31 @@
   </div>
 </section>
 
+ <div id="loader" style="display:none; text-align:center; padding:20px;">
+    <p>Loading products...</p>
+  </div>
 
+  <!-- PRODUCT SECTION -->
+  <section class="products-section">
+    <h2>All Products</h2>
+
+    <!-- Categories -->
+    <div id="categories" class="categories"></div>
+
+    <!-- Products -->
+    <div id="products" class="product-grid"></div>
+  </section>
+
+  <!-- PRODUCT MODAL -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="close-modal">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- JS -->
+<script src="index.js"></script>
 </body>
+
+</html>
