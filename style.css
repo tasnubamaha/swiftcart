@@ -1,0 +1,160 @@
+
+.navbar{
+  padding:18px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  
+}
+
+.logo{
+  font-weight:700;
+  color:#5b6cff;
+  font-size:35px;
+}
+
+.nav-links{
+  list-style:none;
+  display:flex;
+  gap:30px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+  font-size:20px;
+  transition:.3s;
+}
+
+.nav-links a:hover{
+  color:#5b6cff;
+}
+
+.cart{
+  font-size:25px;
+  cursor:pointer;
+}
+
+.hero{
+  height:520px;
+  background:url("images/banner-image.png") center/cover no-repeat;
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    90deg,
+    rgba(20,25,40,0.85),
+    rgba(20,25,40,0.5),
+    rgba(20,25,40,0.1)
+  );
+}
+
+.hero-content{
+  position:relative;
+  color:#fff;
+  max-width:600px;
+  margin-left:180px;
+}
+
+.hero h1{
+  font-size:48px;
+  font-weight:700;
+  margin-bottom:15px;
+}
+
+.hero p{
+  font-size:25px;
+  line-height:1.6;
+  margin-bottom:25px;
+  color:#dcdcdc;
+}
+
+.btn{
+  background:#5b6cff;
+  border:none;
+  padding:12px 28px;
+  color:#fff;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:14px;
+  transition:.3s;
+}
+
+.btn:hover{
+  background:#4353ff;
+}
+
+.why{
+  padding:70px 40px;
+  text-align:center;
+}
+
+.why h2{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.why p{
+  color:#777;
+  margin-bottom:40px;
+  font-size: 20px;
+}
+
+.cards{
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  flex-wrap:wrap;
+}
+
+.card{
+  background:#fff;
+  width:200px;
+  padding:30px 20px;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  transition:.3s;
+  text-align:left;          
+  position:relative;
+  margin-top: 30px;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+
+.icon{
+  width:45px;
+  height:45px;
+  background:#eef0ff;
+  color:#5b6cff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  font-size:20px;
+  margin-bottom:15px;  
+  margin-top: -50px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  border:  1px solid #5b6cff;
+}
+
+
+.card h4{
+  margin-bottom:8px;
+  font-weight:700;
+  font-size: 20px;
+}
+
+.card p{
+  font-size:15px;
+  color:#777;
+  line-height:1.6;
+}
