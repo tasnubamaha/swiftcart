@@ -76,7 +76,7 @@ function displayProducts(){
         <h3>${product.title.slice(0,30)}...</h3>
         <p class="price">$${product.price}</p>
         <div class="product-btns">
-          <button onclick="showDetails(${product.id})" class="details"><i class="fa-solid fa-eye"></i> Details</button>
+          <button onclick="openProductDetails(${product.id})" class="details"><i class="fa-solid fa-eye"></i> Details</button>
           <button onclick="addToCart(${product.id})" class="add"><i class="fa-solid fa-cart-arrow-down"></i> Add</button>
         </div>
       </div>
@@ -92,24 +92,24 @@ function displayProducts(){
 
 
 // Show product details in modal
-async function showDetails(id){
-  const res = await fetch(`${BASE_URL}/products/${id}`);
-  const product = await res.json();
+// async function showDetails(id){
+//   const res = await fetch(`${BASE_URL}/products/${id}`);
+//   const product = await res.json();
 
-  const modal = document.getElementById("modal");
-  const body = document.getElementById("modal-body");
+//   const modal = document.getElementById("modal");
+//   const body = document.getElementById("modal-body");
 
-  body.innerHTML = `
-    <h2>${product.title}</h2>
-    <img src="${product.image}" width="200"/>
-    <p>${product.description}</p>
-    <h3>$${product.price}</h3>
-    <p>⭐ ${product.rating.rate}</p>
-    <button onclick="addToCart(${product.id})">Buy Now</button>
-  `;
+//   body.innerHTML = `
+//     <h2>${product.title}</h2>
+//     <img src="${product.image}" width="200"/>
+//     <p>${product.description}</p>
+//     <h3>$${product.price}</h3>
+//     <p>⭐ ${product.rating.rate}</p>
+//     <button onclick="addToCart(${product.id})">Buy Now</button>
+//   `;
 
-  modal.classList.remove("hidden");
-}
+//   modal.classList.remove("hidden");
+// }
 
 // Close modal
 document.getElementById("close-modal").onclick = () => {
@@ -175,3 +175,66 @@ function checkout(){
   updateCartCount();
 }
 
+
+
+// MODAL
+
+const modal = document.getElementById("modal");
+const modalBody = document.getElementById("modal-body");
+const closeModal = document.getElementById("close-modal");
+
+
+async function openProductDetails(id){
+
+  modal.classList.remove("hidden");
+  modalBody.innerHTML = "<p>Loading...</p>";
+
+  try{
+    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+    const product = await res.json();
+
+    modalBody.innerHTML = `
+      <div class="modal-product">
+
+        <img src="${product.image}" alt="${product.title}">
+
+        <div class="modal-info">
+          <h2>${product.title}</h2>
+
+          <p>${product.description}</p>
+
+          <p>⭐ ${product.rating.rate} (${product.rating.count} reviews)</p>
+
+          <div class="modal-price">$${product.price}</div>
+
+          <button class="add" onclick="addToCart(${product.id})">
+            🛒 Add To Cart
+          </button>
+
+        </div>
+      </div>
+    `;
+
+  }catch(err){
+    modalBody.innerHTML = "<p>Failed to load product.</p>";
+  }
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const modal = document.getElementById("modal");
+  const modalBody = document.getElementById("modal-body");
+  const closeModal = document.getElementById("close-modal");
+
+  closeModal.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.add("hidden");
+    }
+  });
+
+});
