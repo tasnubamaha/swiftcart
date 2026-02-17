@@ -9,7 +9,8 @@
 
 .logo{
   font-weight:700;
-  color:#5b6cff;
+  color:#4f39f6
+;
   font-size:35px;
 }
 
@@ -27,7 +28,7 @@
 }
 
 .nav-links a:hover{
-  color:#5b6cff;
+  color:#4f39f6;
 }
 
 .cart{
@@ -76,7 +77,7 @@
 }
 
 .btn{
-  background:#5b6cff;
+  background:#4f39f6;
   border:none;
   padding:12px 28px;
   color:#fff;
@@ -115,7 +116,7 @@
 
 .card{
   background:#fff;
-  width:200px;
+  width:180px;
   padding:30px 20px;
   border-radius:12px;
   box-shadow:0 6px 18px rgba(0,0,0,0.06);
@@ -134,7 +135,7 @@
   width:45px;
   height:45px;
   background:#eef0ff;
-  color:#5b6cff;
+  color:#4f39f6;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -143,7 +144,7 @@
   margin-bottom:15px;  
   margin-top: -50px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-  border:  1px solid #5b6cff;
+  border:  1px solid #4f39f6;
 }
 
 
@@ -160,13 +161,9 @@
 }
 
 .trending{
-  padding:70px 80px;
-  background:#f5f6f8;
-}
-
-.trending h2{
   font-size:28px;
   margin-bottom:25px;
+  margin-left: 200px;
 }
 
 /* GRID */
@@ -174,9 +171,12 @@
   display:flex;
   gap:25px;
   flex-wrap:wrap;
+  margin-left: 200px;
 }
 
 /* CARD */
+
+
 .product-card{
   background:#fff;
   width:300px;
@@ -207,10 +207,11 @@
   padding:18px;
 }
 
+
 .category{
   font-size:12px;
   background:#eef0ff;
-  color:#5b6cff;
+  color:#4f39f6;
   padding:4px 8px;
   border-radius:6px;
 }
@@ -220,7 +221,9 @@
   font-size:13px;
   color:#666;
 }
-
+.fa-star{
+  color: goldenrod;
+}
 .product-info h4{
   margin:12px 0;
   font-size:16px;
@@ -252,7 +255,7 @@
   flex:1;
   padding:8px;
   border:none;
-  background:#5b6cff;
+  background:#4f39f6;
   color:#fff;
   border-radius:6px;
   cursor:pointer;
@@ -266,3 +269,4 @@
   background:black;
   color:white;
 }
+

@@ -16,7 +16,7 @@
     <li><a href="#">About</a></li>
     <li><a href="#">Contact</a></li>
   </ul>
-    <div class="cart">
+    <div class="cart" onclick="checkout()">
     <i class="fa-solid fa-cart-arrow-down"></i>
     <span id="cart-count">0</span>
   </div>
@@ -76,14 +76,17 @@
 
   <!-- PRODUCT SECTION -->
   <section class="products-section">
-    <h2>All Products</h2>
+    <h2 class="trending">Trending Now</h2>
 
-    <!-- Categories -->
-    <div id="categories" class="categories"></div>
+  
 
     <!-- Products -->
     <div id="products" class="product-grid"></div>
   </section>
+
+  <div style="text-align:center; margin-top:20px;">
+  <button id="loadMoreBtn" class="btn">Load More</button>
+</div>
 
   <!-- PRODUCT MODAL -->
   <div id="modal" class="modal hidden">

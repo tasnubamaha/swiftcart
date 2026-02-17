@@ -1,5 +1,12 @@
 const BASE_URL = "https://fakestoreapi.com";
+
 let cart = [];
+let allProducts = [];   
+let visibleCount = 3;  
+
+cart = JSON.parse(localStorage.getItem("cart")) || [];
+updateCartCount();
+
 
 // Load all categories
 async function loadCategories() {
@@ -24,27 +31,38 @@ async function loadCategories() {
 // Load all products (default)
 async function loadAllProducts() {
   showLoader(true);
+
   const res = await fetch(`${BASE_URL}/products`);
-  const products = await res.json();
-  displayProducts(products);
+  allProducts = await res.json(); 
+  visibleCount = 3; 
+  displayProducts();
+
   showLoader(false);
 }
 
 // Load products by category
 async function loadProductsByCategory(category){
   showLoader(true);
+
   const res = await fetch(`${BASE_URL}/products/category/${category}`);
-  const products = await res.json();
-  displayProducts(products);
+  allProducts = await res.json();
+
+  visibleCount = 3; 
+  displayProducts();
+
   showLoader(false);
 }
 
+
 // Display products
-function displayProducts(products){
+function displayProducts(){
   const container = document.getElementById("products");
   container.innerHTML = "";
 
-  products.forEach(product => {
+  // show only limited products
+  const productsToShow = allProducts.slice(0, visibleCount);
+
+  productsToShow.forEach(product => {
     const card = document.createElement("div");
     card.classList.add("product-card");
 
@@ -54,18 +72,24 @@ function displayProducts(products){
       </div>
       <div class="product-info">
         <span class="category">${product.category}</span>
-        <span class="rating">⭐ ${product.rating.rate}</span>
-        <h4>${product.title.slice(0,40)}...</h4>
+        <span class="rating"><i class="fa-solid fa-star"></i> ${product.rating.rate} (${product.rating.count})</span>
+        <h3>${product.title.slice(0,30)}...</h3>
         <p class="price">$${product.price}</p>
         <div class="product-btns">
-          <button onclick="showDetails(${product.id})" class="details">👁 Details</button>
-          <button onclick='addToCart(${JSON.stringify(product)})' class="add">🛒 Add</button>
+          <button onclick="showDetails(${product.id})" class="details"><i class="fa-solid fa-eye"></i> Details</button>
+          <button onclick="addToCart(${product.id})" class="add"><i class="fa-solid fa-cart-arrow-down"></i> Add</button>
         </div>
       </div>
     `;
+
     container.appendChild(card);
   });
+
+  // hide button if all shown
+  document.getElementById("loadMoreBtn").style.display =
+    visibleCount >= allProducts.length ? "none" : "inline-block";
 }
+
 
 // Show product details in modal
 async function showDetails(id){
@@ -81,7 +105,7 @@ async function showDetails(id){
     <p>${product.description}</p>
     <h3>$${product.price}</h3>
     <p>⭐ ${product.rating.rate}</p>
-    <button onclick='addToCart(${JSON.stringify(product)})'>Buy Now</button>
+    <button onclick="addToCart(${product.id})">Buy Now</button>
   `;
 
   modal.classList.remove("hidden");
@@ -93,11 +117,17 @@ document.getElementById("close-modal").onclick = () => {
 };
 
 // Cart functions
-function addToCart(product){
+async function addToCart(id){
+
+  const res = await fetch(`${BASE_URL}/products/${id}`);
+  const product = await res.json();
+
   cart.push(product);
-  updateCartCount();
+
   localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
 }
+
 
 function updateCartCount(){
   document.getElementById("cart-count").innerText = cart.length;
@@ -117,5 +147,31 @@ function shopNow(){
 }
 
 // Initialize
-loadCategories();
-loadAllProducts();
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartCount();
+  loadCategories();
+  loadAllProducts();
+});
+
+
+
+document.getElementById("loadMoreBtn").onclick = () => {
+  visibleCount += 3; 
+  displayProducts();
+};
+
+
+function checkout(){
+
+  if(cart.length === 0){
+    alert("🛒 Your cart is empty!");
+    return;
+  }
+
+  alert("✅ Order placed successfully!");
+
+  cart = [];
+  localStorage.removeItem("cart");
+  updateCartCount();
+}
+
